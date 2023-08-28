@@ -10,15 +10,10 @@ import java.util.Map;
 	public class CrudOperations {
 	    
 
-	    public static void main(String[] args) {
-	    	 String url = "jdbc:mysql://localhost:3306/First_DB";
-		     String uname = "root";
-		     String pwd = "root";
-		     
-	    	  try {
-	            Class.forName("com.mysql.cj.jdbc.Driver");
-	            Connection con = DriverManager.getConnection(url, uname, pwd);
-	            Statement st=con.createStatement();
+	    public static void main(String[] args) throws Exception {
+	    	
+	    	DatabaseConnection.getConnection();
+	    	 
 	            
 	         // Create
 	            
@@ -44,15 +39,15 @@ import java.util.Map;
 	            
 	            Map<String, Integer> up = new HashMap<>();
 	            
-	            	up.put("stu_id", 1);
+	            	up.put("stu_id", 6);
 	            	
 	            Map<String, Integer> up2 = new HashMap<>();
 	            	
-	            	up2.put("stu_age", 20);
+	            	up2.put("stu_age", 18);
 	            	
 	            Map<String, String> up3 = new HashMap<>();
 		           
-		            up3.put("stu_name","Viji");
+		            up3.put("stu_name","Shalini");
 		            
 		        UpdateDemo ud=new UpdateDemo();
 		        
@@ -62,7 +57,7 @@ import java.util.Map;
 		        
 		        Map<String, Integer> rm = new HashMap<>();
 		        
-		        rm.put("stu_id", 5);
+		        rm.put("stu_id", 4);
 		        DeleteDemo dd=new DeleteDemo();
 		        
 
@@ -76,15 +71,12 @@ import java.util.Map;
 	            
 	            
 	            
-	            //id.insertRecord(con, dm,dm2,dm3);
-	            rd2.readRecords(con,re);
-	            //ud.updateRecord(con,up,up2,up3);
-	            //dd.deleteRecord(con, rm);
+	            //id.insertRecord(dm,dm2,dm3);
+	            //rd2.readRecords(re);
+	            //ud.updateRecord(up,up2,up3);
+	            dd.deleteRecord(rm);
 
-	            con.close();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+	            
 	    }
 	}
 

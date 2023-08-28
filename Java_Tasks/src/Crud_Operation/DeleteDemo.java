@@ -3,7 +3,8 @@ import java.sql.*;
 import java.util.Map;
 
 public class DeleteDemo {
-	public void deleteRecord(Connection con,Map<String, Integer> rm ) throws Exception{
+	public void deleteRecord(Map<String, Integer> rm ) throws Exception{
+		Connection con=DatabaseConnection.getConnection();
 		
 		Object stu_id=rm.get("stu_id");
 		

@@ -4,7 +4,9 @@ import java.sql.*;
 import java.util.Map;
 
 public class UpdateDemo {
-	public void updateRecord(Connection con,Map<String,Integer> up,Map<String,Integer> up2,Map<String,String> up3) throws Exception {
+	public void updateRecord(Map<String,Integer> up,Map<String,Integer> up2,Map<String,String> up3) throws Exception {
+		
+		Connection con=DatabaseConnection.getConnection();
 		
 		Object Id =up.get("stu_id");
 		

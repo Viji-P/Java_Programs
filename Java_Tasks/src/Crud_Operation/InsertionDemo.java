@@ -4,8 +4,9 @@ import java.sql.*;
 import java.util.Map;
 
 public class InsertionDemo {
-	public void insertRecord(Connection con, Map<String, Integer> dm,Map<String, Integer> dm2,Map<String, String> dm3) throws Exception{
+	public void insertRecord( Map<String, Integer> dm,Map<String, Integer> dm2,Map<String, String> dm3) throws Exception{
 		
+		Connection con=DatabaseConnection.getConnection();
 		
 		Object Id =dm.get("stu_id");
 		

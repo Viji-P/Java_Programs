@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ReadDemo {
-	public List<Map<String, Object>> readRecords(Connection con,List<Map<String,Object>> re) throws Exception{
+	public List<Map<String, Object>> readRecords(List<Map<String,Object>> re) throws Exception{
        
-		
+		Connection con=DatabaseConnection.getConnection();
 		String query="select*from Students";
 		
 		Statement st=con.createStatement();
