@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+  <movie>
+    <name>Aladdin</name>
+    <director>Guy Ritchie</director>
+    <year>2019</year>
+  </movie>
+  <movie>
+    <name>Avatar</name>
+    <director>James Cameron</director>
+    <year>2010</year>
+  </movie>
+  <movie>
+    <name>Frozen</name>
+    <director>Jennifer Lee</director>
+    <year>2013</year>
+  </movie>
+</movies>
