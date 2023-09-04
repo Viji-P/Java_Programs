@@ -1,7 +1,9 @@
 package XPath;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -17,17 +19,21 @@ import javax.xml.xpath.XPathFactory;
 
 
 public class Reading_Xml {
+	
 
 	public static void main(String[] args) throws Exception{
 		
 		
 		Reading_Xml read=new Reading_Xml();
-		read.display();
+		List<Map<String,String>> result=read.display();
+		System.out.println(result);
+		
+		
 		}
 		
 		
-		public void display() throws Exception {
-		Map<String,String> dm=new HashMap<>();
+		public List<Map<String,String>> display() throws Exception {
+		List<Map<String,String>> dm=new ArrayList<>();
 		
 		String filePath="src//Movies.xml";
 		
@@ -37,7 +43,7 @@ public class Reading_Xml {
 		
 		Document document=builder.parse(new File(filePath));
 		
-		//d.getDocumentElement().normalize();
+		document.getDocumentElement().normalize();
 		
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		
@@ -45,7 +51,7 @@ public class Reading_Xml {
 		
 		
 		
-		String expression = "//movie[1]/name";
+		String expression = "//movies";
 		
         
         NodeList nl=(NodeList) xpath.compile(expression).evaluate(document, XPathConstants.NODESET);
@@ -54,15 +60,13 @@ public class Reading_Xml {
         	String elementName=nl.item(i).getNodeName();
         	String elementValue=nl.item(i).getTextContent();
         	
-            dm.put(elementName, elementValue);
+        	Map<String,String> xmlData=new HashMap<>();
+            xmlData.put(elementName, elementValue);
+            dm.add(xmlData);
         	
         }
+		return  dm;
 		
-		
-        for (Map.Entry<String, String> entry : dm.entrySet()) 
-    		System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-    
-	
 		}
 }
 	
