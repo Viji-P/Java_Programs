@@ -25,23 +25,29 @@ public class Reading_Xml {
 		
 		
 		Reading_Xml read=new Reading_Xml();
-		List<Map<String,String>> result=read.display();
+		
+		String filePath="src//xml_Files";
+		List<Map<String,String>> result=read.readXmlFiles(filePath);
+		
 		System.out.println(result);
 		
 		
 		}
 		
 		
-		public List<Map<String,String>> display() throws Exception {
+		public List<Map<String,String>> readXmlFiles(String filePath) throws Exception {
 		List<Map<String,String>> dm=new ArrayList<>();
 		
-		String filePath="src//Movies.xml";
+		File directory=new File(filePath);
+		File[] files=directory.listFiles((dir,name) -> name.toLowerCase().endsWith(".xml"));
 		
 		DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
 		
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		
-		Document document=builder.parse(new File(filePath));
+		for(File file:files) {
+		
+		Document document=builder.parse(file);
 		
 		document.getDocumentElement().normalize();
 		
@@ -65,6 +71,7 @@ public class Reading_Xml {
             dm.add(xmlData);
         	
         }
+		}
 		return  dm;
 		
 		}
