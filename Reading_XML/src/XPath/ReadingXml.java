@@ -1,5 +1,7 @@
 package XPath;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -28,28 +30,33 @@ public class ReadingXml {
 		
 		ReadingXml read=new ReadingXml();
 		
-		String xmlStrings= "<bookstore><book><title>The Hobbit</title>"
-				+ "<price>12.99</price></book></bookstore>";
+		File xmlFile=new File("src/xml_Files/Movies.xml");
+				
+		//String xmlString=xmlFile.getPath();
 		
-		String xmlToString=read.convertToString(xmlStrings);
+		//System.out.println(xmlString);
+		
+		String xmlToString=read.convertToString(xmlFile);
 		System.out.println(xmlToString);
+		
+
+		List<Map<String,String>> result=read.readXmlFiles(xmlToString);
+		
+		System.out.println(result);
 		
 		
 		}
 		
-		public String convertToString(String xmlStrings) throws Exception {
+		public String convertToString(File xmlFile) throws Exception {
 			
-			TransformerFactory transformFactory=TransformerFactory.newInstance();
-			Transformer transformer=transformFactory.newTransformer();
-			StringWriter writer=new StringWriter();
-			DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
-			
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			
-		    Document doc=builder.parse(new InputSource(new StringReader(xmlStrings)));	
-		    
-		    transformer.transform(new DOMSource(doc), new StreamResult(writer));
-			return writer.toString();
+			 try (FileReader fileReader = new FileReader(xmlFile)) {
+				StringBuilder stringBuilder = new StringBuilder();
+		        int ch;
+		        while ((ch = fileReader.read()) != -1) {
+		            stringBuilder.append((char) ch);
+		        }
+		        return stringBuilder.toString();
+			}
 		}
 	
 		
@@ -67,7 +74,7 @@ public class ReadingXml {
 		
 		document.getDocumentElement().normalize();
 		
-        NodeList nl=(NodeList) document.getElementsByTagName("price");
+        NodeList nl=(NodeList) document.getElementsByTagName("movie");
         
         for(int i=0;i<nl.getLength();i++) {
         	
