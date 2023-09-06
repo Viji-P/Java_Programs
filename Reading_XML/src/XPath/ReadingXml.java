@@ -12,23 +12,18 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
 
-
-public class Reading_Xml {
+public class ReadingXml {
 	
 
 	public static void main(String[] args) throws Exception{
 		
-		Reading_Xml read=new Reading_Xml();
+		ReadingXml read=new ReadingXml();
 		
-		String[] xmlStrings= {
-				"<fruits><fruit><name>Apple</name></fruit></fruits>",
-				"<bookstore><book><title>The Hobbit</title></book></bookstore>"
-				};
+		String xmlStrings= "<bookstore><book><title>The Hobbit</title>"
+				+ "<price>12.99</price></book></bookstore>";
+				
 		
 		List<Map<String,String>> result=read.readXmlFiles(xmlStrings);
 		
@@ -38,7 +33,7 @@ public class Reading_Xml {
 		}
 		
 		
-		public List<Map<String,String>> readXmlFiles(String[] xmlStrings) throws Exception {
+		public List<Map<String,String>> readXmlFiles(String xmlStrings) throws Exception {
 		List<Map<String,String>> dm=new ArrayList<>();
 		
 		
@@ -46,22 +41,13 @@ public class Reading_Xml {
 		
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		
-		for(String String:xmlStrings) {
+	
 		
-		Document document=builder.parse(new InputSource(new StringReader(String)));
+		Document document=builder.parse(new InputSource(new StringReader(xmlStrings)));
 		
 		document.getDocumentElement().normalize();
 		
-		XPathFactory xPathFactory = XPathFactory.newInstance();
-		
-		XPath xpath = xPathFactory.newXPath();
-		
-		
-		
-		String expression = "//fruits";
-		
-        
-        NodeList nl=(NodeList) xpath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        NodeList nl=(NodeList) document.getElementsByTagName("price");
         
         for(int i=0;i<nl.getLength();i++) {
         	
@@ -73,7 +59,7 @@ public class Reading_Xml {
             dm.add(xmlData);
         	
         }
-		}
+		
 		return  dm;
 		
 		}
