@@ -15,13 +15,6 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 
 public class ReadingXml {
 	
@@ -31,10 +24,6 @@ public class ReadingXml {
 		ReadingXml read=new ReadingXml();
 		
 		File xmlFile=new File("src/xml_Files/Movies.xml");
-				
-		//String xmlString=xmlFile.getPath();
-		
-		//System.out.println(xmlString);
 		
 		String xmlToString=read.convertToString(xmlFile);
 		System.out.println(xmlToString);
@@ -56,6 +45,7 @@ public class ReadingXml {
 		            stringBuilder.append((char) ch);
 		        }
 		        return stringBuilder.toString();
+		        
 			}
 		}
 	
